@@ -1,0 +1,35 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  build-website:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Build website
+        shell: bash
+        run: |
+          rm -rf dist
+          mkdir dist
+          cp -a website/. dist/
+
+          node --check dist/main.js
+          node --check dist/compress.js
+          node --check dist/alphabets.js
+          node --check dist/qrcode.js
+
+          test -f dist/index.html
+          test -f dist/404.html
