@@ -1,5 +1,5 @@
 FROM nginx:alpine
 
 COPY nginx.conf /etc/nginx/conf.d/default.conf
-COPY index.html 404.html /usr/share/nginx/html/
-COPY alphabets.js compress.js main.js qrcode.js standalone.js /usr/share/nginx/html/
+COPY website/index.html website/404.html /usr/share/nginx/html/
+COPY website/alphabets.js website/compress.js website/main.js website/qrcode.js /usr/share/nginx/html/
